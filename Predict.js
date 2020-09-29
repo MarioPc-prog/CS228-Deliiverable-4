@@ -201,7 +201,7 @@ function drawCircles(){
     for (var j=0; j<numSamples; j++){
         var x = irisData.pick(j).get(0);
         var y = irisData.pick(j).get(1);
-        circle(x*100,y*100,50);
+        circle(x*100,y*100,10);
     }
 }
 function draw(){
