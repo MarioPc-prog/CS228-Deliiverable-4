@@ -164,7 +164,7 @@ function Train(){
     for(var x = 0; x < numSamples;x++){
        if (x%2===0){
              //console.log(irisData.pick(x).toString());
-             currentFeatures = irisData.pick(x).slice([0,4]).tolist();
+             currentFeatures = irisData.pick(x).slice([0,2]).tolist();
              currentLabel = irisData.pick(x).get(4);
              knnClassifier.addExample(currentFeatures,currentLabel);
 //             console.log(currentFeatures);
@@ -175,7 +175,7 @@ function Train(){
 }
 function Test(){
     if (testingSampleIndex%2!==0){
-       currentFeatures = irisData.pick(testingSampleIndex).slice([0,4]).tolist();
+       currentFeatures = irisData.pick(testingSampleIndex).slice([0,2]).tolist();
        currentLabel = irisData.pick(testingSampleIndex).get(4);
        var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
 //     console.log(x);
@@ -198,10 +198,51 @@ function GotResults(err, result){
     predictedClassLabels.set(testingSampleIndex, parseInt(result.label));
 }
 function drawCircles(){
-    for (var j=0; j<numSamples; j++){
-        var x = irisData.pick(j).get(0);
-        var y = irisData.pick(j).get(1);
-        circle(x*100,y*100,10);
+    //represent the color value
+     var r,g,b;
+    for (var z=0; z<numSamples; z++){
+        var x = irisData.pick(z).get(0);
+        var y = irisData.pick(z).get(1);
+        var c = irisData.pick(z).get(4);
+    if(c === 0){
+      r = 255;
+      g = 0;
+      b = 0;
+    }
+    else if(c === 1){
+      r = 0;
+      g = 0;
+      b = 255;
+    }
+    else if(c === 2){
+      r = 0;
+      g = 255;
+      b = 0;
+    }
+    fill(r, g, b);
+    if(z % 2===0){
+      stroke(0, 0, 0);
+    }
+    else{
+      if(predictedClassLabels.get(z) === 0){
+        r = 255;
+        g = 0;
+        b = 0;
+      }
+      else if(predictedClassLabels.get(z) === 1){
+        r = 0;
+        g = 0;
+        b = 255;
+      }
+      else if(predictedClassLabels.get(z) === 2){
+        r = 0;
+        g = 255;
+        b = 0;
+      }
+      stroke(r, g, b);
+    }
+    circle(x*100, y*100, 10);
+    //console.log(predictedClassLabels.get(x));
     }
 }
 function draw(){
