@@ -1,4 +1,5 @@
 const knnClassifier = ml5.KNNClassifier();
+
 //represent the first even number row 
 var testingSampleIndex = 1;
 var trainingCompleted = false;
@@ -157,13 +158,16 @@ var irisData = nj.array([[
 
 var numSamples = irisData.shape[0];
 var numFeatures = irisData.shape[1] - 1;
+var currentFeatures ;
+var currentLabels;
+var predictedClassLabels = nj.zeros(numSamples);
 function Train(){
     console.log("Training");
     for(var x = 0; x < numSamples;x++){
        if (x%2===0){
              //console.log(irisData.pick(x).toString());
-             var currentFeatures = irisData.pick(x).slice([0,4]).tolist();
-             var currentLabel = irisData.pick(x).get(4);
+             currentFeatures = irisData.pick(x).slice([0,4]).tolist();
+             currentLabel = irisData.pick(x).get(4);
              knnClassifier.addExample(currentFeatures,currentLabel);
 //             console.log(currentFeatures);
 //             console.log(currentLabel);
@@ -173,23 +177,28 @@ function Train(){
 }
 function Test(){
     if (testingSampleIndex%2!==0){
-       var currentFeatures = irisData.pick(testingSampleIndex).slice([0,4]).tolist();
-       var currentLabel = irisData.pick(testingSampleIndex).get(4);
-       //var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
+       currentFeatures = irisData.pick(testingSampleIndex).slice([0,4]).tolist();
+       currentLabel = irisData.pick(testingSampleIndex).get(4);
+       var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
 //     console.log(x);
-       console.log(currentFeatures);
-       console.log(currentLabel);
-//     console.log(predictedLabel);
+//       console.log(currentFeatures);
+//       console.log(currentLabel);
+       //console.log(predictedLabel);
        }
    }
 
 function GotResults(err, result){
-     console.log(parseInt(result.label));
+     //console.log(parseInt(result.label));
 //    testingSampleIndex+=2;
 //  if(testingSampleIndex>numSamples){
 //    testingSampleIndex = 1;
 //  }
-//  predictedClassLabels.set(testingSampleIndex, parseInt(result.label));
+    testingSampleIndex+=2;
+    console.log(predictedClassLabels.set(testingSampleIndex, parseInt(result.label)));
+//    if(testingSampleIndex>numSamples){
+//       testingSampleIndex = 1;
+//    }
+//    predictedClassLabels.set(testingSampleIndex, parseInt(result.label));
 }
 
 function draw(){
