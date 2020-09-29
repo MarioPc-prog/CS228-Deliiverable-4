@@ -1,4 +1,5 @@
 const knnClassifier = ml5.KNNClassifier();
+//represent the first even number row 
 var testingSampleIndex = 1;
 var trainingCompleted = false;
 var irisData = nj.array([[	
@@ -164,25 +165,39 @@ function Train(){
              var currentFeatures = irisData.pick(x).slice([0,4]).tolist();
              var currentLabel = irisData.pick(x).get(4);
              knnClassifier.addExample(currentFeatures,currentLabel);
-//               console.log(currentFeatures);
-//               console.log(currentLabel);
+//             console.log(currentFeatures);
+//             console.log(currentLabel);
        }
    }
 
 }
 function Test(){
-    if(testingSampleIndex%2 !== 0){
-      var currentFeatures = irisData.pick(testingSampleIndex).slice([0,4]).tolist();
-      var currentLabel = irisData.pick(testingSampleIndex).get(4);
-      //console.log(currentFeatures);
-      //console.log(currentLabel);
-      var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
-        
-    }
+    for(var x = 0; x < numSamples;x++){
+       if (x%2===0){
+            var currentFeatures = irisData.pick(x).slice([0,4]).tolist();
+            var currentLabel = irisData.pick(x).get(4);
+            console.log(currentFeatures);
+            console.log(currentLabel);
+       }
+   }
+//    if(testingSampleIndex%2 !== 0){
+//      var currentFeatures = irisData.pick(testingSampleIndex).slice([0,4]).tolist();
+//      var currentLabel = irisData.pick(testingSampleIndex).get(4);
+//      //console.log(currentFeatures);
+//      //console.log(currentLabel);
+//      var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
+//        
+//    }
 }
 function GotResults(err, result){
-    console.log(parseInt(result.label));
+    //console.log(parseInt(result.label));
+//    testingSampleIndex+=2;
+//  if(testingSampleIndex>numSamples){
+//    testingSampleIndex = 1;
+//  }
+//  predictedClassLabels.set(testingSampleIndex, parseInt(result.label));
 }
+
 function draw(){
     clear();
     if (trainingCompleted === false){
