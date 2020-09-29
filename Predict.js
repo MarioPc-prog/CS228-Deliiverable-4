@@ -1,4 +1,5 @@
 const knnClassifier = ml5.KNNClassifier();
+var testingSampleIndex = 1;
 var trainingCompleted = false;
 var irisData = nj.array([[	
         5.1	,	3.5	,	1.4	,	0.2	,	0	],
@@ -162,15 +163,21 @@ function Train(){
              //console.log(irisData.pick(x).toString());
              var currentFeatures = irisData.pick(x).slice([0,4]).tolist();
              var currentLabel = irisData.pick(x).get(4);
-             //knnClassifier.addExample(currentFeatures.tolist(),currentLabel);
-               console.log(currentFeatures);
-               console.log(currentLabel);
+             knnClassifier.addExample(currentFeatures,currentLabel);
+//               console.log(currentFeatures);
+//               console.log(currentLabel);
        }
    }
 
 }
 function Test(){
-    
+    if(testingSampleIndex%2 !== 0){
+      var currentFeatures = irisData.pick(testingSampleIndex).slice([0,4]).tolist();
+      var currentLabel = irisData.pick(testingSampleIndex).get(4);
+      console.log(currentFeatures);
+      console.log(currentLabel);
+        
+    }
 }
 function draw(){
     clear();
@@ -179,5 +186,5 @@ function draw(){
          trainingCompleted = true ; 
          
     }
-   // Test();
+    Test();
 } 
