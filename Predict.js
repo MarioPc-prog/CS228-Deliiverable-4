@@ -172,26 +172,17 @@ function Train(){
 
 }
 function Test(){
-    for(var x = 0; x < numSamples;x++){
-       if (x%2===0){
-            var currentFeatures = irisData.pick(x).slice([0,4]).tolist();
-            var currentLabel = irisData.pick(x).get(4);
-            var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
-//            console.log(x);
-//            console.log(currentFeatures);
-//            console.log(currentLabel);
-//            console.log(predictedLabel);
+    if (testingSampleIndex%2!==0){
+       var currentFeatures = irisData.pick(testingSampleIndex).slice([0,4]).tolist();
+       var currentLabel = irisData.pick(testingSampleIndex).get(4);
+       //var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
+//     console.log(x);
+       console.log(currentFeatures);
+       console.log(currentLabel);
+//     console.log(predictedLabel);
        }
    }
-//    if(testingSampleIndex%2 !== 0){
-//      var currentFeatures = irisData.pick(testingSampleIndex).slice([0,4]).tolist();
-//      var currentLabel = irisData.pick(testingSampleIndex).get(4);
-//      //console.log(currentFeatures);
-//      //console.log(currentLabel);
 
-//        
-//    }
-}
 function GotResults(err, result){
      console.log(parseInt(result.label));
 //    testingSampleIndex+=2;
