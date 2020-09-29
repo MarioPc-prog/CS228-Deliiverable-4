@@ -1,8 +1,3 @@
-const knnClassifier = ml5.KNNClassifier();
-
-//represent the first even number row 
-var testingSampleIndex = 1;
-var trainingCompleted = false;
 var irisData = nj.array([[	
         5.1	,	3.5	,	1.4	,	0.2	,	0	],
 [	4.9	,	3	,	1.4	,	0.2	,	0	],
@@ -155,12 +150,15 @@ var irisData = nj.array([[
 [	6.2	,	3.4	,	5.4	,	2.3	,	2	],
 [	5.9	,	3	,	5.1	,	1.8	,	2	],
 ]);
-
+const knnClassifier = ml5.KNNClassifier();
+var testingSampleIndex = 1;
+var trainingCompleted = false;
 var numSamples = irisData.shape[0];
 var numFeatures = irisData.shape[1] - 1;
 var currentFeatures ;
 var currentLabels;
 var predictedClassLabels = nj.zeros(numSamples);
+
 function Train(){
     console.log("Training");
     for(var x = 0; x < numSamples;x++){
@@ -194,13 +192,18 @@ function GotResults(err, result){
 //    testingSampleIndex = 1;
 //  }
     testingSampleIndex+=2;
-    console.log(predictedClassLabels.set(testingSampleIndex, parseInt(result.label)));
-//    if(testingSampleIndex>numSamples){
-//       testingSampleIndex = 1;
-//    }
-//    predictedClassLabels.set(testingSampleIndex, parseInt(result.label));
+    if(testingSampleIndex>numSamples){
+       testingSampleIndex = 1;
+    }
+    predictedClassLabels.set(testingSampleIndex, parseInt(result.label));
 }
-
+function drawCircles(){
+    for (var j=0; j<numSamples; j++){
+        var x = irisData.pick(j).get(0);
+        var y = irisData.pick(j).get(1);
+        circle(x,y,50);
+    }
+}
 function draw(){
     clear();
     if (trainingCompleted === false){
@@ -209,4 +212,5 @@ function draw(){
          
     }
     Test();
-} 
+   drawCircles();
+ } 
