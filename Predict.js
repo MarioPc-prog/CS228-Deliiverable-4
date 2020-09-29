@@ -159,7 +159,7 @@ function Train(){
     console.log("Training");
     for(var x = 0; x < numSamples;x++){
        if (x%2===0){
-             console.log(numSamples);
+             console.log(irisData.pick(x).toString());
        }
    }
 
