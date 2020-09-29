@@ -176,8 +176,11 @@ function Test(){
        if (x%2===0){
             var currentFeatures = irisData.pick(x).slice([0,4]).tolist();
             var currentLabel = irisData.pick(x).get(4);
-            console.log(currentFeatures);
-            console.log(currentLabel);
+            var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
+//            console.log(x);
+//            console.log(currentFeatures);
+//            console.log(currentLabel);
+//            console.log(predictedLabel);
        }
    }
 //    if(testingSampleIndex%2 !== 0){
@@ -185,12 +188,12 @@ function Test(){
 //      var currentLabel = irisData.pick(testingSampleIndex).get(4);
 //      //console.log(currentFeatures);
 //      //console.log(currentLabel);
-//      var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
+
 //        
 //    }
 }
 function GotResults(err, result){
-    //console.log(parseInt(result.label));
+     console.log(parseInt(result.label));
 //    testingSampleIndex+=2;
 //  if(testingSampleIndex>numSamples){
 //    testingSampleIndex = 1;
