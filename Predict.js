@@ -174,10 +174,14 @@ function Test(){
     if(testingSampleIndex%2 !== 0){
       var currentFeatures = irisData.pick(testingSampleIndex).slice([0,4]).tolist();
       var currentLabel = irisData.pick(testingSampleIndex).get(4);
-      console.log(currentFeatures);
-      console.log(currentLabel);
+      //console.log(currentFeatures);
+      //console.log(currentLabel);
+      var predictedLabel = knnClassifier.classify(currentFeatures, GotResults);
         
     }
+}
+function GotResults(err, result){
+    console.log(parseInt(result.label));
 }
 function draw(){
     clear();
