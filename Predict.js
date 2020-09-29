@@ -1,3 +1,4 @@
+const knnClassifier = ml5.KNNClassifier();
 var trainingCompleted = false;
 var irisData = nj.array([[	
         5.1	,	3.5	,	1.4	,	0.2	,	0	],
@@ -154,12 +155,16 @@ var irisData = nj.array([[
 
 var numSamples = irisData.shape[0];
 var numFeatures = irisData.shape[1] - 1;
-var trainingCompleted = false;
 function Train(){
     console.log("Training");
     for(var x = 0; x < numSamples;x++){
        if (x%2===0){
-             console.log(irisData.pick(x).toString());
+             //console.log(irisData.pick(x).toString());
+             var currentFeatures = irisData.pick(x).slice([0,4]).tolist();
+             var currentLabel = irisData.pick(x).get(4);
+             //knnClassifier.addExample(currentFeatures.tolist(),currentLabel);
+               console.log(currentFeatures);
+               console.log(currentLabel);
        }
    }
 
