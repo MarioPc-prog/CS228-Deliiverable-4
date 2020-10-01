@@ -150,6 +150,8 @@ var irisData = nj.array([[
 [	6.2	,	3.4	,	5.4	,	2.3	,	2	],
 [	5.9	,	3	,	5.1	,	1.8	,	2	],
 ]);
+//assign my global variables 
+//ML5 classify function 
 const knnClassifier = ml5.KNNClassifier();
 var testingSampleIndex = 1;
 var trainingCompleted = false;
